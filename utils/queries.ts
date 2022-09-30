@@ -46,13 +46,15 @@ export const postDetailQuery = (postId: string | string[]) => {
       image
     },
      likes,
-    comments[]{
-      comment,
-      _key,
-      postedBy->{
-        _ref,
-      _id,
-    },
+    'comments': *[_type == "comment" && post._ref == ^._id]{
+        _id,
+        postedBy->{
+          _id,
+          userName,
+          image
+        },
+        comment,
+        _createdAt
     }
   }`;
   return query;
